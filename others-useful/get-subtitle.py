@@ -1,4 +1,5 @@
 
+# Ziyodullo Aliyev @Ziyodev
 
 f = open("subtitle/matrix.srt", "r+")
 all_words = f.read()
