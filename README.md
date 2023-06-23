@@ -5,4 +5,4 @@
 
 - text-to-speach (english)
 - chatgpt (chat)
-
+- stability ( draw image )
