@@ -29,7 +29,7 @@ function bot($method, $datas = [])
 $update = json_decode(file_get_contents('php://input'));
 $message = $update->message ?? null;
 $callback_query = $update->callback_query ?? null;
-$command_text = "/loading - turli xil loading kolleksiyasi\n/aboutme - O'zim haqimda";
+$command_text = "/loading - turli xil zagruzkalar kolleksiyasi\n/aboutme - Ziyodullo Aliyev haqida\n/resume - Me resume file";
 
 
 if (isset($callback_query)) {
@@ -87,8 +87,7 @@ if (isset($callback_query)) {
         $first = $loading['block']['white']['load'];
         $last = $loading['block']['white']['block'];
         loading($first, $last);
-    }
-    else {
+    } else {
         bot('editmessagetext', [
             'chat_id' => $cid,
             'message_id' => $mid,
@@ -135,6 +134,13 @@ if (isset($callback_query)) {
                     [['text' => "GO 🔙", 'callback_data' => 'back']],
                 ]
             ])
+        ]);
+    } elseif ($text == "/resume") {
+        $localPdfFile = 'rezume.pdf';
+
+        $a = bot('sendDocument', [
+            'chat_id' => $cid,
+            'document' => new CURLFile($localPdfFile)
         ]);
     } else {
         bot('sendmessage', [
