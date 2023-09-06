@@ -50,12 +50,12 @@ class Model
         }
 
         $compiled =
-        // write php open tag
-        $this->open_php . $this->new_line . $this->new_line . $this->new_line
-        . $this->probel . $this->varible_head . "model_name" . $this->varible_value . "'" . $classname . "'" . $this->end_varible . $this->new_line
-        . $this->probel . $this->varible_head . "model_names" . $this->varible_value . "'" . $model_names . "'" . $this->end_varible . $this->new_line
-        . $this->probel . $this->varible_head . "table_head" . $this->varible_value . '"' . $table_head . '"' . $this->end_varible . $this->new_line
-        . $this->probel . $this->varible_head . "table_values" . $this->varible_value . '[' . $table_value . ']' . $this->end_varible . $this->new_line
+        $this->get_model . $this->new_line . $this->new_line . $this->new_line
+        // write require base class
+        . $this->varible_head . "model_name" . $this->varible_value . "'" . $classname . "'" . $this->end_varible . $this->new_line
+        . $this->varible_head . "model_names" . $this->varible_value . "'" . $model_names . "'" . $this->end_varible . $this->new_line
+        . $this->varible_head . "table_head" . $this->varible_value . '"' . $table_head . '"' . $this->end_varible . $this->new_line
+        . $this->varible_head . "table_values" . $this->varible_value . '[' . $table_value . ']' . $this->end_varible . $this->new_line
         // write pagination
         . $this->pagination_code . $this->new_line . $this->close_php
         // write require base class
@@ -74,4 +74,4 @@ class Model
 
 $generate = new Model();
 $generate->directory = "migrations";
-$generate->create_admin("text", ["id", "title", "text", "active", "create_at"], ["id", "title", "text", "active", "create_at"] );
+$generate->create_admin("region", ["id", "title", "text", "active", "create_at"], ["id", "title", "text", "active", "create_at"] );
