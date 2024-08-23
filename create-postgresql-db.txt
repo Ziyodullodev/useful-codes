@@ -1,0 +1,26 @@
+postgresql server yaratish va sozlash
+
+
+db o'rniga o'zizi database nomini qo'yasiz.
+user o'rniga kerakli username.
+passwordni ham o'zizga moslab olasiz!
+
+
+sudo apt update
+sudo apt list --upgradable
+sudo apt upgrade -y
+sudo apt install libpq-dev postgresql postgresql-contrib -y
+sudo -i -u postgres psql
+
+CREATE DATABASE db;
+CREATE USER user WITH PASSWORD 'pass';
+ALTER ROLE user SET client_encoding TO 'utf8';
+ALTER ROLE user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE db TO user;
+
+\l
+
+GRANT ALL PRIVILEGES ON SCHEMA public TO user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO user;
+\q
