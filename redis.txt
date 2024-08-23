@@ -1,0 +1,25 @@
+redis sozlash va ornatish
+
+sudo apt update
+sudo apt list --upgradable
+sudo apt upgrade -y
+sudo apt install redis-server
+sudo systemctl status redis-server.service 
+redis-cli -h localhost
+sudo nano /etc/redis/redis.conf
+ - file ichida 
+    -- bind 0.0.0.0
+    -- prodected_mode no 
+  shularni bajarasiz
+
+sudo systemctl restart redis-server.service 
+
+shu bilan tayyor
+
+server uchun 6379 port ochib qoyish esdan chiqmasin!
+
+
+
+
+
+
