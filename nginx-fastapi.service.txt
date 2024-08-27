@@ -1,0 +1,69 @@
+sudo apt update
+sudo apt install python3-venv python3-dev libpq-dev nginx curl -y
+
+python3.12 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+nano .env
+
+sudo ufw allow 8000
+
+
+pip install gunicorn
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000
+
+sudo nano /etc/nginx/sites-available/fastapi_project
+
+server {
+    listen 80;
+    server_name url;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/fastapi_project /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+
+
+sudo nano /etc/systemd/system/fastapi_project.service
+
+[Unit]
+Description=Gunicorn instance to serve FastAPI Project
+After=network.target
+
+[Service]
+User=
+Group=
+WorkingDirectory=/home/ubuntu/
+ExecStart=/home/ubuntu/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 127.0.0.1:8000
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+sudo systemctl start fastapi_project
+sudo systemctl enable fastapi_project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
