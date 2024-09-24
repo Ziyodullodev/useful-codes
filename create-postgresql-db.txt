@@ -27,3 +27,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO user
 sudo nano /etc/postgresql/16/main/postgresql.conf liste_host
 
 server uchun 5432 port ochib qoyish esdan chiqmasin!
+
+
+agar permission xatolik bersa?
+ALTER USER <user_name> WITH SUPERUSER;
+
